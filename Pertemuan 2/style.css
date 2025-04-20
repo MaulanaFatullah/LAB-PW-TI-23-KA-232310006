@@ -1,0 +1,58 @@
+p {
+  border: groove;
+  color: red;
+  text-align: center;
+  margin-top: 100px;
+  margin-right: 100px;
+  margin-bottom: 150px;
+  margin-left: 80px;
+  text-align: justify;
+}
+h1 {
+    text-align: center;
+    margin: 25px 50px 75px 100px;
+}
+h2 {
+    text-align: left;
+}
+h3 {
+    text-align: right;
+}
+
+/* Menggunakan ID */
+#para1 {
+  text-align: center;
+  color: blue;
+}
+/* Menggunakan Class */
+p.description {
+  text-align: left;
+  color: green;
+}
+/* Selector combination */
+div p {
+  background-color: yellow;
+}
+/* Psuedo-class  */
+.para1:hover {
+  background-color: tomato;
+  font-weight: bold;
+}
+/* Psuedo-element */
+p::first-line {
+  color: #ff0000;
+  font-variant: small-caps;
+}
+/* Selektor atribut */
+a[target] {
+  background-color: yellow;
+}
+a[target="_blank"] {
+  background-color: purple;
+}
+div {
+    padding: 50px 30px 50px 80px;
+
+    height: 500px;
+    width: 50%;
+}
