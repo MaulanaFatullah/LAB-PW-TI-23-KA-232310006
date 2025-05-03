@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+        <title>Latihan 1</title>
+    </head>
+
+    <body class="p-4 bg-body-secondary vh-100 flex align-content-center justify-content-center">
+        <div class="container card p-4 h-auto w-50">
+            <h2 class="mb-4">Form input</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"><b>NIM</b></label>
+                    <input type="number" class="form-control" id="nim" title="nim" placeholder="Masukkan NIM...">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label"><b>Nama</b></label>
+                    <input type="text" class="form-control" id="name" placeholder="Masukkan nama..." title="name">
+                </div>
+                <div class="mb-3">
+                    <label for="gender"><b>Jenis Kelamin</b></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="male" id="male" title="male">
+                    <label class="form-check-label" for="male">
+                        Laki-laki
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="female" id="female" title="female">
+                    <label class="form-check-label" for="female">
+                        Perempuan
+                    </label>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label for="religion"><b>Agama</b></label>
+                </div>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Islam</option>
+                    <option value="2">Kristen</option>
+                    <option value="3">Katolik</option>
+                    <option value="4">Hindu</option>
+                    <option value="5">Budha</option>
+                    <option value="6">Konghuchu</option>
+                </select>
+
+
+                <div class="mb-3 mt-3">
+                    <label for="status"><b>Status</b></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="married" id="married" title="married">
+                    <label class="form-check-label" for="married">
+                        Menikah
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="single" id="single" title="single">
+                    <label class="form-check-label" for="single">
+                        Belum menikah
+                    </label>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label for="jurusan"><b>Jurusan</b></label>
+                </div>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Teknologi Informasi</option>
+                    <option value="2">Sistem Informasi</option>
+                    <option value="3">Pemasaran</option>
+                    <option value="4">Bisnis Digital</option>
+                </select>
+
+                <div class="mb-3 mt-3">
+                    <label for="comment"><b>Komentar</b></label>
+                </div>
+
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                        style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">Komentar</label>
+                </div>
+
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </div>
+            </form>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+        
+
+</html>
