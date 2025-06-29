@@ -1,0 +1,25 @@
+:root {
+    --bg-main: #141844;
+    --card-bg: #1b1b3a;
+    --primary: #6c63ff;
+    --secondary: #ffb400;
+    --accent: #00bfa6;
+    --bg-secondary: #221e4d;
+    --outline: #2f2f54;
+    --hero-circle: #f5d062;
+    --text-light: #ededed;
+    --text-dark: #1a1a1a;
+}
+.btn-outline-light:hover {
+    background-color: var(--secondary);
+    color: var(--bg-main); /* atau var(--text-dark) */
+    border-color: var(--secondary);
+}
+input::placeholder {
+    color: #ccc !important; /* abu-abu muda */
+    opacity: 1; /* pastikan terlihat */
+}
+.active-link {
+    color: var(--secondary) !important;
+    border-bottom: 2px solid var(--secondary);
+}
