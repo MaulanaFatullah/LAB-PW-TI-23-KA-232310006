@@ -1,8 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Custom classes */
-.btn-lecture {
-  @apply bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg transition;
-}
