@@ -1,0 +1,6 @@
+[submodule "Pertemuan 9/ibik-learning"]
+	path = Pertemuan 9/ibik-learning
+	url = https://github.com/MaulanaFatullah/ibik-learning
+[submodule "Tugas Akhir Semester/PW-Final-Project-Terra"]
+	path = Tugas Akhir Semester/PW-Final-Project-Terra
+	url = https://github.com/MaulanaFatullah/PW-Final-Project-Terra.git
