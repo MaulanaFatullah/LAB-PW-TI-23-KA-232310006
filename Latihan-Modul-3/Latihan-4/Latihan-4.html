@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kalkulator Tabungan dengan Bunga</title>
+        <style>
+            :root {
+                --primary: #9C398B;
+                --secondary: #db76ca;
+                --accent: #6B0000;
+                --bg-page: #c968b9;
+                --text-main: #333;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                background: var(--bg-page);
+                color: #333;
+                min-height: 100vh;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .container {
+                max-width: 800px;
+                width: 100%;
+                background-color: white;
+                border-radius: 20px;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+                overflow: hidden;
+            }
+
+            header {
+                background: var(--primary);
+                color: white;
+                padding: 30px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+                margin-bottom: 10px;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            .content {
+                padding: 30px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+
+            .form-section {
+                flex: 1;
+                min-width: 300px;
+            }
+
+            .result-section {
+                flex: 1;
+                min-width: 300px;
+            }
+
+            .section-title {
+                color: #2c3e50;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid var(--secondary);
+            }
+
+            .form-group {
+                margin-bottom: 25px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #2c3e50;
+                font-size: 1.1rem;
+            }
+
+            input {
+                width: 100%;
+                padding: 15px;
+                border: 2px solid #ddd;
+                border-radius: 10px;
+                font-size: 18px;
+                transition: all 0.3s;
+            }
+
+            input:focus {
+                border-color: var(--primary);
+                outline: none;
+                box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+            }
+
+            .btn-calculate {
+                background: var(--accent);
+                color: white;
+                border: none;
+                padding: 18px 30px;
+                font-size: 20px;
+                border-radius: 12px;
+                cursor: pointer;
+                width: 100%;
+                font-weight: 600;
+                transition: all 0.3s;
+                margin-top: 10px;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+                letter-spacing: 1px;
+            }
+
+            .btn-calculate:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+                background: var(--accent);
+            }
+
+            .btn-calculate:active {
+                transform: translateY(1px);
+            }
+
+            .result-container {
+                background: #e6d7e3;
+                border-radius: 15px;
+                padding: 25px;
+                box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.05);
+            }
+
+            .result-item {
+                padding: 15px;
+                margin-bottom: 15px;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: all 0.3s;
+            }
+
+            .result-item:hover {
+                transform: translateX(5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .month-label {
+                font-weight: 600;
+                color: #2c3e50;
+                font-size: 1.2rem;
+            }
+
+            .saldo-value {
+                font-weight: 700;
+                color: var(--primary);
+                font-size: 1.3rem;
+            }
+
+            .formula {
+                background-color: #e3f2fd;
+                border-left: 4px solid var(--secondary);
+                padding: 15px;
+                border-radius: 0 10px 10px 0;
+                margin-top: 25px;
+                font-size: 0.95rem;
+            }
+
+            .formula-title {
+                font-weight: 700;
+                margin-bottom: 8px;
+                color: #2c3e50;
+            }
+
+            .highlight {
+                background-color: #ffeb3b;
+                padding: 0 5px;
+                border-radius: 3px;
+                font-weight: 700;
+            }
+
+
+            @media (max-width: 768px) {
+                .content {
+                    flex-direction: column;
+                }
+
+                h1 {
+                    font-size: 2.2rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h1>Kalkulator Tabungan</h1>
+            </header>
+
+            <div class="content">
+                <div class="form-section">
+                    <h2 class="section-title">Input Data Tabungan</h2>
+                    <div class="form-group">
+                        <label for="saldo">Saldo Awal (Rp)</label>
+                        <input type="number" id="saldo" placeholder="Masukkan saldo awal" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bunga">Bunga per Bulan (%)</label>
+                        <input type="number" id="bunga" placeholder="Masukkan bunga per bulan" min="0" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="waktu">Jangka Waktu (bulan)</label>
+                        <input type="number" id="waktu" placeholder="Masukkan jangka waktu" min="1">
+                    </div>
+
+                    <button class="btn-calculate" onclick="hitungSaldo()">Hitung Saldo</button>
+
+                    <div class="formula">
+                        <div class="formula-title">Rumus Perhitungan</div>
+                        <p>Saldo akhir dihitung menggunakan bunga majemuk:</p>
+                        <p><span class="highlight">Saldo<sub>n</sub> = Saldo<sub>0</sub> × (1 +
+                                bunga)<sup>n</sup></span></p>
+                        <p>Dimana:</p>
+                        <ul>
+                            <li>Saldo<sub>0</sub> = Saldo awal</li>
+                            <li>bunga = Persentase bunga per bulan (dalam desimal)</li>
+                            <li>n = Jangka waktu (dalam bulan)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <h2 class="section-title">Hasil Perhitungan</h2>
+                    <div class="result-container" id="resultContainer">
+                        <p style="text-align: center; color: #6c757d; padding: 20px;">
+                            Masukkan data tabungan dan klik "Hitung Saldo" untuk melihat hasil
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            function hitungSaldo() {
+                const saldoAwal = parseFloat(document.getElementById('saldo').value);
+                const bunga = parseFloat(document.getElementById('bunga').value);
+                const waktu = parseInt(document.getElementById('waktu').value);
+
+                if (isNaN(saldoAwal) || saldoAwal <= 0) {
+                    alert('Saldo awal harus diisi dengan angka lebih besar dari 0');
+                    return;
+                }
+
+                if (isNaN(bunga) || bunga < 0) {
+                    alert('Bunga harus diisi dengan angka positif');
+                    return;
+                }
+
+                if (isNaN(waktu) || waktu < 1) {
+                    alert('Jangka waktu harus diisi dengan angka minimal 1');
+                    return;
+                }
+
+                const bungaDesimal = bunga / 100;
+
+                let saldo = saldoAwal;
+                let hasilHTML = '';
+
+                for (let bulan = 1; bulan <= waktu; bulan++) {
+                    saldo = saldo * (1 + bungaDesimal);
+
+                    const saldoFormatted = new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR',
+                        minimumFractionDigits: 0
+                    }).format(saldo);
+
+                    hasilHTML += `
+                    <div class="result-item">
+                        <span class="month-label">Saldo Bulan ${bulan}</span>
+                        <span class="saldo-value">${saldoFormatted}</span>
+                    </div>
+                `;
+                }
+
+                document.getElementById('resultContainer').innerHTML = hasilHTML;
+            }
+
+            window.onload = hitungSaldo;
+        </script>
+    </body>
+
+</html>

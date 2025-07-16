@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form Data Mahasiswa</title>
+        <style>
+            :root {
+                --primary: #9C398B;
+                --secondary: #c968b9;
+                --accent: #6B0000;
+                --bg-page: #c968b9;
+                --text-main: #333;
+            }
+
+            body {
+                font-family: 'Open Sans', sans-serif;
+                background: var(--bg-page);
+                color: var(--text-main);
+                max-width: 700px;
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+
+            h1 {
+                text-align: center;
+                color: white;
+                margin-bottom: 1rem;
+            }
+
+            form,
+            #output {
+                background: #fff;
+                padding: 24px;
+                border-radius: 12px;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+                border-top: 4px solid var(--primary);
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 6px;
+                font-weight: 600;
+                color: var(--primary);
+            }
+
+            input[type="text"],
+            textarea,
+            select {
+                width: 100%;
+                padding: 10px 12px;
+                border: 2px solid var(--secondary);
+                border-radius: 6px;
+                transition: border-color 0.2s;
+                box-sizing: border-box;
+            }
+
+            input:focus,
+            textarea:focus,
+            select:focus {
+                outline: none;
+                border-color: var(--primary);
+            }
+
+            .radio-group,
+            .checkbox-group {
+                display: flex;
+                gap: 20px;
+            }
+
+            .radio-group label,
+            .checkbox-group label {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                cursor: pointer;
+                color: var(--text-main);
+            }
+
+            .radio-group input,
+            .checkbox-group input {
+                accent-color: var(--primary);
+            }
+
+            button {
+                background: var(--accent);
+                color: #fff;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background 0.2s, transform 0.1s;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            button:hover {
+                background: #550000;
+                transform: translateY(2px);
+            }
+
+            #output h2 {
+                color: var(--primary);
+                margin-bottom: 12px;
+            }
+
+            #output p {
+                margin: 8px 0;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <h1>Form Data Mahasiswa</h1>
+
+        <form id="mhsForm">
+            <div class="form-group">
+                <label for="nim">NIM</label>
+                <input type="text" id="nim" required />
+            </div>
+
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" required />
+            </div>
+
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <div class="radio-group" id="genderGroup">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="agama">Agama</label>
+                <select id="agama" required>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <div class="radio-group" id="statusGroup">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="jurusan">Jurusan</label>
+                <select id="jurusan" required>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="komentar">Komentar</label>
+                <textarea id="komentar" rows="4" placeholder="Tulis komentar..." required></textarea>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="output" style="display:none;">
+            <h2>Data yang Anda Kirim</h2>
+            <p><strong>NIM:</strong> <span id="outNim"></span></p>
+            <p><strong>Nama:</strong> <span id="outNama"></span></p>
+            <p><strong>Jenis Kelamin:</strong> <span id="outGender"></span></p>
+            <p><strong>Agama:</strong> <span id="outAgama"></span></p>
+            <p><strong>Status:</strong> <span id="outStatus"></span></p>
+            <p><strong>Jurusan:</strong> <span id="outJurusan"></span></p>
+            <p><strong>Komentar:</strong> <span id="outKomentar"></span></p>
+        </div>
+
+        <script>
+
+            const options = {
+                gender: ["Laki-laki", "Perempuan"],
+                agama: ["Islam", "Kristen", "Katolik", "Hindu", "Buddha", "Konghucu"],
+                status: ["Aktif", "Cuti", "Lulus", "Mangkir"],
+                jurusan: ["TI", "SI", "MI", "TK", "TKK"]
+            };
+
+
+            function populateRadios(containerId, name, arr) {
+                const container = document.getElementById(containerId);
+                for (let val of arr) {
+                    const lbl = document.createElement("label");
+                    const rd = document.createElement("input");
+                    rd.type = "radio";
+                    rd.name = name;
+                    rd.value = val;
+                    rd.required = true;
+                    lbl.appendChild(rd);
+                    lbl.appendChild(document.createTextNode(val));
+                    container.appendChild(lbl);
+                }
+            }
+
+            function populateSelect(selectId, arr) {
+                const sel = document.getElementById(selectId);
+                const placeholder = document.createElement("option");
+                placeholder.textContent = "-- Pilih --";
+                placeholder.value = "";
+                placeholder.disabled = true;
+                placeholder.selected = true;
+                sel.appendChild(placeholder);
+                for (let val of arr) {
+                    const opt = document.createElement("option");
+                    opt.value = val;
+                    opt.textContent = val;
+                    sel.appendChild(opt);
+                }
+            }
+
+
+            populateRadios("genderGroup", "gender", options.gender);
+            populateRadios("statusGroup", "status", options.status);
+            populateSelect("agama", options.agama);
+            populateSelect("jurusan", options.jurusan);
+
+
+            document.getElementById("mhsForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const data = {
+                    nim: document.getElementById("nim").value.trim(),
+                    nama: document.getElementById("nama").value.trim(),
+                    gender: document.querySelector('input[name="gender"]:checked').value,
+                    agama: document.getElementById("agama").value,
+                    status: document.querySelector('input[name="status"]:checked').value,
+                    jurusan: document.getElementById("jurusan").value,
+                    komentar: document.getElementById("komentar").value.trim()
+                };
+
+                if (!data.nim || !data.nama) {
+                    alert("NIM dan Nama wajib diisi!");
+                    return;
+                }
+
+                document.getElementById("outNim").textContent = data.nim;
+                document.getElementById("outNama").textContent = data.nama;
+                document.getElementById("outGender").textContent = data.gender;
+                document.getElementById("outAgama").textContent = data.agama;
+                document.getElementById("outStatus").textContent = data.status;
+                document.getElementById("outJurusan").textContent = data.jurusan;
+                document.getElementById("outKomentar").textContent = data.komentar;
+
+                document.getElementById("output").style.display = "block";
+            });
+        </script>
+
+    </body>
+
+</html>

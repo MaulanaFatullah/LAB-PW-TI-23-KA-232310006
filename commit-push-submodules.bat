@@ -1,39 +1,56 @@
 @echo off
 setlocal enabledelayedexpansion
 
-echo 🔍 Memeriksa dan push submodule dengan log dan auto-commit...
+echo 🔧 Menjalankan proses auto-commit & push untuk semua submodule...
 
-for /f "delims=" %%s in ('git config --file .gitmodules --get-regexp path ^| findstr /v /r "^$"') do (
-    set "line=%%s"
-    set "submodulePath=!line:*=!"
-    
+REM Ambil semua path submodule dari .gitmodules
+for /f "tokens=2 delims= " %%s in ('git config --file .gitmodules --get-regexp path') do (
+    set "submodulePath=%%s"
     echo.
     echo 🧭 Submodule: !submodulePath!
     echo --------------------------------------------------
     cd "!submodulePath!"
 
-    echo 📌 Commit terbaru:
+    echo 📌 Commit terakhir:
     git log -1 --oneline
     echo.
 
-    REM Cek apakah ada perubahan
-    git status --porcelain > nul
+    REM Cek perubahan lokal
+    git status --porcelain >nul
     if errorlevel 1 (
-        echo ✅ Tidak ada perubahan, lanjut push...
+        echo ✅ Tidak ada perubahan lokal, lanjut push...
     ) else (
-        echo ⚠️ Terdeteksi perubahan pada submodule: !submodulePath!
-        echo 🔄 Melakukan auto-commit...
+        echo ⚠️ Terdeteksi perubahan lokal. Melakukan auto-commit...
 
         git add .
         git commit -m "Auto commit: update submodule !submodulePath!"
     )
 
+    echo 🚀 Melakukan push ke origin/main...
     git push origin main
-    echo 🚀 Submodule !submodulePath! sudah di-push.
+    echo ✅ Submodule !submodulePath! telah di-push.
 
     cd ../..
 )
 
 echo.
-echo 🟢 Semua submodule selesai diproses!
+echo 🔍 Sekarang memeriksa repos utama...
+git status
+echo --------------------------------------------------
+
+REM Tanyakan apakah user ingin push repos utama
+set /p USERCHOICE=👉 Commit & push repos utama juga? (Y/N): 
+if /I "%USERCHOICE%"=="Y" (
+    echo 📌 Menambahkan semua perubahan di repos utama...
+    git add .
+    git commit -m "Auto commit: update root repo and submodules"
+    echo 🚀 Melakukan push ke origin/main...
+    git push origin main
+    echo ✅ Repos utama telah di-push!
+) else (
+    echo ⏭️ Push repos utama dilewati.
+)
+
+echo.
+echo 🟢 Semua proses Git selesai!
 pause
